@@ -7,9 +7,6 @@ Created on Wed Jun 14 2017
 # Inputs required : i) Transformer rating
 #                   ii) Total load connected per level   
 
-"""PROBLEMS
-"""
-
 
 from collections import defaultdict 
 transformer_dict = defaultdict(dict)
@@ -26,10 +23,10 @@ def transformer_sizing(level_total,transformer_rating):
             
         temp_total = 0
         
-        for i in range(init_count,len(level_total)):
-            if level_total[i] > transformer_rating :
-                break
-            
+        for i in range(init_count,len(level_total)):        # consider one transformer with some specified rating
+            if level_total[i] > transformer_rating :        # now it will check against the temp_total value
+                break                                       # if rating > temp_total : add the level load to temp_total
+                                                            # if not store prev temp_total and transformer count and loop again.
             temp_total += level_total[i]
             
             if temp_total >= transformer_rating :
